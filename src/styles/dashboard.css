@@ -1,0 +1,198 @@
+/* Dashboard Layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.welcome-section {
+    grid-column: 1 / -1;
+    margin-bottom: var(--spacing-md);
+    background: linear-gradient(135deg, var(--md-sys-color-primary), var(--md-sys-color-tertiary));
+    color: white;
+    padding: var(--spacing-xl);
+    border-radius: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#fresh-start-container {
+    grid-column: 1 / -1;
+}
+
+.task-column+.task-column {
+    border-left: 2px solid var(--md-sys-color-surface-variant, #e0e0e0);
+    padding-left: var(--spacing-lg);
+}
+
+.welcome-section h2 {
+    font-size: var(--text-headline-medium);
+    margin-bottom: var(--spacing-xs);
+}
+
+.welcome-section .date-header {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-sm);
+}
+
+.welcome-section .daily-quote {
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: var(--spacing-sm);
+    max-width: 500px;
+    line-height: 1.4;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    color: var(--md-sys-color-on-surface);
+}
+
+.badge {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Task Card Styling */
+.task-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-left: 6px solid transparent;
+}
+
+/* Logic for type colors */
+.task-card.type-school {
+    --task-color: var(--color-school, var(--md-sys-color-primary));
+}
+
+.task-card.type-house {
+    --task-color: var(--color-house, var(--md-sys-color-tertiary));
+}
+
+.task-card.type-appointment {
+    --task-color: var(--color-event, var(--md-sys-color-error));
+}
+
+.task-card.type-work {
+    --task-color: var(--color-work, #FD7F2C);
+}
+
+.task-card.type-goal {
+    --task-color: var(--color-goal, #1E88E5);
+}
+
+.task-card {
+    border-left-color: var(--task-color, var(--md-sys-color-primary));
+}
+
+.task-card .material-symbols-rounded {
+    color: var(--task-color, var(--md-sys-color-primary));
+}
+
+.task-icon-container {
+    background-color: var(--md-sys-color-surface-variant);
+    padding: 12px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-content {
+    flex: 1;
+}
+
+.task-title {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.task-time {
+    font-size: 12px;
+    color: var(--md-sys-color-outline);
+}
+
+.task-card .check-btn {
+    color: var(--task-color, var(--md-sys-color-primary));
+    background-color: transparent;
+    border: 1px solid var(--task-color, var(--md-sys-color-outline));
+}
+
+.task-card .check-btn:hover {
+    background-color: var(--task-color, var(--md-sys-color-primary));
+}
+
+.task-card .check-btn:hover .material-symbols-rounded {
+    color: white;
+}
+
+/* Completed State */
+.task-card.completed {
+    opacity: 0.6;
+    background-color: #f0f0f0;
+}
+
+.task-card.completed .task-title {
+    text-decoration: line-through;
+}
+
+.task-card.completed .check-btn {
+    background-color: var(--task-color, var(--md-sys-color-primary));
+    border-color: var(--task-color, var(--md-sys-color-primary));
+}
+
+.task-card.completed .check-btn .material-symbols-rounded {
+    color: white;
+}
+
+/* ADHD Urgency System */
+
+/* 4 Days Out: Subtle (Red Bold Date) */
+.task-card.urgency-subtle .task-time {
+    color: var(--md-sys-color-error, #B3261E);
+    font-weight: 700;
+}
+
+/* 2 Days Out: Moderate (Red Border + Red Bold Date) */
+.task-card.urgency-moderate {
+    border-left-color: var(--md-sys-color-error, #B3261E) !important;
+}
+
+.task-card.urgency-moderate .task-time {
+    color: var(--md-sys-color-error, #B3261E);
+    font-weight: 700;
+}
+
+.task-card.urgency-moderate .task-icon-container {
+    background-color: rgba(179, 38, 30, 0.1);
+    /* light error tint */
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .task-column+.task-column {
+        border-left: none;
+        padding-left: 0;
+        border-top: 2px solid var(--md-sys-color-surface-variant);
+        padding-top: var(--spacing-md);
+    }
+
+    .welcome-section {
+        padding: var(--spacing-md);
+    }
+}
