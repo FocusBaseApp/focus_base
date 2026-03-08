@@ -1,4 +1,4 @@
-import { store } from '../utils/Store.js?v=9';
+import { store } from '../utils/Store.js';
 
 export default class Settings {
     constructor(container) {
@@ -17,11 +17,23 @@ export default class Settings {
 
         this.container.innerHTML = `
             <div>
-                
+                <section style="margin-bottom: 32px;">
+                    <h3>Calendar Region</h3>
+                    <p style="margin-bottom: 16px; opacity: 0.7;">Set your region to automatically show local holidays on your calendar.</p>
+                    <div style="max-width: 300px;">
+                        <select id="region-select" style="width: 100%; padding: 12px; border-radius: 8px; background: var(--surface); color: var(--on-surface); border: 1px solid var(--outline); font-size: 16px; cursor: pointer;">
+                            <option value="US" ${settings.region === 'US' ? 'selected' : ''}>United States</option>
+                            <option value="CA" ${settings.region === 'CA' ? 'selected' : ''}>Canada</option>
+                            <option value="GB" ${settings.region === 'GB' ? 'selected' : ''}>United Kingdom</option>
+                            <option value="AU" ${settings.region === 'AU' ? 'selected' : ''}>Australia</option>
+                            <option value="none" ${settings.region === 'none' ? 'selected' : ''}>None (No Holidays)</option>
+                        </select>
+                    </div>
+                </section>
+
                 <section style="margin-bottom: 32px;">
                     <h3>Customize Categories</h3>
                     <p style="margin-bottom: 16px; opacity: 0.7;">Turn off what you don't need.</p>
-                    
                     <div class="setting-item">
                         <label>
                             <input type="checkbox" id="toggle-school" ${settings.showSchool ? 'checked' : ''}>
@@ -46,6 +58,30 @@ export default class Settings {
                             Personal Goals
                         </label>
                     </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="toggle-notes" ${settings.showNotes !== false ? 'checked' : ''}>
+                            Notes & Lists
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="toggle-journal" ${settings.showJournal !== false ? 'checked' : ''}>
+                            Journal
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label>
+                            <input type="checkbox" id="toggle-routines" ${settings.showRoutines !== false ? 'checked' : ''}>
+                            Daily Routines
+                        </label>
+                    </div>
+                </section>
+
+                <section style="margin-bottom: 32px;">
+                    <h3>Special Occasions</h3>
+                    <p style="margin-bottom: 16px; opacity: 0.7;">Add birthdays and anniversaries. They'll automatically appear on your calendar.</p>
+                    <button id="manage-occasions-btn" class="btn secondary">Manage Occasions</button>
                 </section>
 
                 <section style="margin-bottom: 32px;">
@@ -90,8 +126,8 @@ export default class Settings {
 
                 <section style="margin-bottom: 32px; border: 1px solid var(--md-sys-color-error); padding: 16px; border-radius: 8px;">
                     <h3 style="color: var(--md-sys-color-error);">Danger Zone</h3>
-                    <p>Permanently delete all tasks and data.</p>
-                    <button id="clear-data-btn" class="btn" style="background-color: var(--md-sys-color-error); color: white; width: 100%;">Clear All Data</button>
+                    <p>Permanently delete tasks, journals, or completely wipe your app.</p>
+                    <button id="clear-data-btn" class="btn" style="background-color: var(--md-sys-color-error); color: white; width: 100%;">Manage Data Deletion</button>
                 </section>
             </div>
         `;
@@ -103,12 +139,16 @@ export default class Settings {
                     showHouse: this.container.querySelector('#toggle-house').checked,
                     showWork: this.container.querySelector('#toggle-work').checked,
                     showGoals: this.container.querySelector('#toggle-goals').checked,
+                    showNotes: this.container.querySelector('#toggle-notes').checked,
+                    showJournal: this.container.querySelector('#toggle-journal').checked,
+                    showRoutines: this.container.querySelector('#toggle-routines').checked,
                     themeColor: this.container.querySelector('#theme-color').value,
                     colorSchool: this.container.querySelector('#color-school').value,
                     colorHouse: this.container.querySelector('#color-house').value,
                     colorWork: this.container.querySelector('#color-work').value,
                     colorEvent: this.container.querySelector('#color-event').value,
                     colorGoal: this.container.querySelector('#color-goal').value,
+                    region: this.container.querySelector('#region-select').value,
                 };
                 store.updateSettings(newSettings);
             } catch (err) {
@@ -117,7 +157,7 @@ export default class Settings {
         };
 
         // Auto-save on any input change
-        const checkInputs = this.container.querySelectorAll('input[type="checkbox"]');
+        const checkInputs = this.container.querySelectorAll('input[type="checkbox"], select');
         checkInputs.forEach(input => input.addEventListener('change', saveSettings));
 
         // Auto-save on color picker changes (both as they drag and when they close)
@@ -128,10 +168,17 @@ export default class Settings {
         });
 
         this.container.querySelector('#clear-data-btn').addEventListener('click', () => {
-            if (confirm('Are you sure you want to delete ALL tasks and points? This cannot be undone.')) {
-                store.clearData();
-                alert('All data cleared.');
+            if (window.app && window.app.deleteModal) {
+                window.app.deleteModal.open();
+            }
+        });
+
+        // Special Occasions Logic
+        this.container.querySelector('#manage-occasions-btn').addEventListener('click', () => {
+            if (window.app && window.app.occasionModal) {
+                window.app.occasionModal.open();
             }
         });
     }
+
 }
