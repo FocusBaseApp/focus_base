@@ -25,32 +25,45 @@
       "src": "./app_icon_192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "./app_icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "./app_icon_512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "./app_icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "screenshots": [
     {
       "src": "./screenshot_narrow.png",
-      "sizes": "1080x1920",
+      "sizes": "375x812",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Focus Base Dashboard on Mobile"
     },
     {
       "src": "./screenshot_wide.png",
-      "sizes": "1920x1080",
+      "sizes": "512x512",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Focus Base Dashboard on Desktop"
     }
   ],
   "prefer_related_applications": false,
+  "related_applications": [],
   "shortcuts": [
     {
       "name": "Add New Task",
