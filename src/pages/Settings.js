@@ -20,8 +20,8 @@ export default class Settings {
                 <section style="margin-bottom: 32px;">
                     <h3>Calendar Region</h3>
                     <p style="margin-bottom: 16px; opacity: 0.7;">Set your region to automatically show local holidays on your calendar.</p>
-                    <div style="max-width: 300px;">
-                        <select id="region-select" style="width: 100%; padding: 12px; border-radius: 8px; background: var(--surface); color: var(--on-surface); border: 1px solid var(--outline); font-size: 16px; cursor: pointer;">
+                    <div style="max-width: 300px; display: flex;">
+                        <select id="region-select" style="flex: 1; padding: 10px 24px; border-radius: 100px; background: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface-variant); border: none; font-size: 14px; font-weight: 500; font-family: inherit; cursor: pointer; height: 40px; box-sizing: border-box; outline: none;">
                             <option value="US" ${settings.region === 'US' ? 'selected' : ''}>United States</option>
                             <option value="CA" ${settings.region === 'CA' ? 'selected' : ''}>Canada</option>
                             <option value="GB" ${settings.region === 'GB' ? 'selected' : ''}>United Kingdom</option>
@@ -81,8 +81,7 @@ export default class Settings {
                 <section style="margin-bottom: 32px;">
                     <h3>Special Occasions</h3>
                     <p style="margin-bottom: 16px; opacity: 0.7;">Add birthdays and anniversaries. They'll automatically appear on your calendar.</p>
-                    <button id="manage-occasions-btn" class="btn secondary">Manage Occasions</button>
-                </section>
+                    <button id="manage-occasions-btn" class="btn secondary" style="font-size: 14px; font-family: inherit; font-weight: 500; background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface-variant); height: 40px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 100px; border: none; cursor: pointer; white-space: nowrap;">Manage Occasions</button>
 
                 <section style="margin-bottom: 32px;">
                     <h3>Appearance & Category Colors</h3>

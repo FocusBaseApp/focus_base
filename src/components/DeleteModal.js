@@ -47,7 +47,7 @@ export default class DeleteModal {
                         <label style="display: flex; align-items: center; gap: 8px; font-size: 15px; cursor: pointer;">
                             <input type="checkbox" id="del-routines" class="del-cb"> Daily Routines
                         </label>
-                        <label style="display: flex; align-items: center; gap: 8px; font-size: 15px; cursor: pointer; border-top: 1px solid var(--outline); padding-top: 12px; margin-top: 4px;">
+                        <label style="display: flex; align-items: center; gap: 8px; font-size: 15px; cursor: pointer;">
                             <input type="checkbox" id="del-points" class="del-cb"> Focus Points & Badges
                         </label>
                     </div>
