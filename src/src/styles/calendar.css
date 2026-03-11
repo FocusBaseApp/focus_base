@@ -1,0 +1,87 @@
+.day-events {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+}
+
+.calendar-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.calendar-task {
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    white-space: normal;
+    /* Allow text to wrap now */
+    word-break: break-word;
+    /* Prevent long unbroken text from forcing column width */
+    overflow: hidden;
+    color: white;
+}
+
+.calendar-task.calendar-task[data-id] {
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.1s;
+}
+
+.calendar-task[data-id]:hover {
+    filter: brightness(0.9);
+    transform: scale(1.02);
+}
+
+.calendar-task.type-school {
+    background-color: var(--color-school, var(--md-sys-color-primary));
+    color: var(--color-school-text, white);
+}
+
+.calendar-task.type-house {
+    background-color: var(--color-house, var(--md-sys-color-tertiary));
+    color: var(--color-house-text, white);
+}
+
+.calendar-task.type-appointment {
+    background-color: var(--color-event, var(--md-sys-color-error));
+    color: var(--color-event-text, white);
+}
+
+.calendar-task.type-work {
+    background-color: var(--color-work, #FD7F2C);
+    color: var(--color-work-text, white);
+}
+
+.calendar-task.type-goal {
+    background-color: var(--color-goal);
+    color: var(--color-goal-text);
+}
+
+.calendar-task.type-annual {
+    background-color: var(--color-annual);
+    color: var(--color-annual-text);
+}
+
+.calendar-task.type-holiday {
+    background-color: transparent;
+    color: var(--md-sys-color-primary);
+    border: 1px solid var(--md-sys-color-outline);
+    font-weight: bold;
+}
+
+/* New style for completed tasks */
+.calendar-task.completed {
+    opacity: 0.6;
+    text-decoration: line-through;
+    filter: grayscale(0.5);
+}
+
+@media (max-width: 768px) {
+    .calendar-task {
+        font-size: 8px;
+        padding: 1px 2px;
+    }
+}

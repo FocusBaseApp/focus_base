@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+    <meta name="theme-color" content="#6750A4">
+    <link rel="manifest" href="manifest.json?v=48">
+    <link rel="icon" type="image/png" href="app_icon_192.png">
+    <title>Focus Base</title>
+    <!-- Google Fonts: Roboto and Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="./src/styles/components.css?v=48">
+    <link rel="stylesheet" href="./src/styles/main.css?v=48">
+    <link rel="stylesheet" href="./src/styles/sidebar.css?v=48">
+    <link rel="stylesheet" href="./src/styles/dashboard.css?v=48">
+    <link rel="stylesheet" href="./src/styles/pages.css?v=48">
+    <link rel="stylesheet" href="./src/styles/focus.css?v=48">
+    <link rel="stylesheet" href="./src/styles/modal.css?v=48">
+    <link rel="stylesheet" href="./src/styles/fresh_start.css?v=48">
+    <link rel="stylesheet" href="./src/styles/calendar.css?v=48">
+    <link rel="stylesheet" href="./src/styles/task_extras.css?v=48">
+</head>
+
+<body>
+    <div id="app">
+        <nav id="sidebar"></nav>
+        <main id="main-content">
+            <header id="top-bar"
+                style="display: flex; justify-content: space-between; align-items: center; padding-right: 1rem;">
+                <h1>Today's Focus</h1>
+                <button id="global-help-btn" class="icon-btn" title="Help / Instructions"
+                    style="background: var(--surface); color: var(--on-surface-variant); display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--outline-variant); cursor: pointer;">
+                    <span class="material-symbols-rounded">help</span>
+                </button>
+            </header>
+            <div id="view-container">
+                <!-- Dynamic content will receive injection here -->
+                <div class="loading-state">
+                    <span class="material-symbols-rounded spinning">refresh</span>
+                    <p>Loading your space...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Application Logic -->
+    <script type="module" src="./src/app.js?v=48"></script>
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('ServiceWorker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>
